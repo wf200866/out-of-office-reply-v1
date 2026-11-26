@@ -12,7 +12,11 @@ REPLY = (
 
 def main() -> None:
     text = REPLY
-    assert 1 <= len(text) <= 160, "entry must be 1-160 characters"
+    if not 1 <= len(text) <= 160 or not text.strip():
+        raise SystemExit(
+            "entry must be 1-160 characters of non-whitespace text "
+            f"(got {len(text)} chars)"
+        )
 
     out_dir = "/output"
     os.makedirs(out_dir, exist_ok=True)
